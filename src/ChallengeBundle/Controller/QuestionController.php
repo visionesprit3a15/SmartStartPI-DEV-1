@@ -23,7 +23,7 @@ class QuestionController extends Controller
                 'choice_label' => 'nom',
                 'multiple'=>false
             ), array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-            ->add('save',SubmitType::class, array('label'=>'save', 'attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-bottom:15px')))
+
             ->getForm();
         $form -> handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -85,7 +85,7 @@ class QuestionController extends Controller
                 'choice_label' => 'nom',
                 'multiple'=>false
             ), array('attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-            ->add('save',SubmitType::class, array('label'=>'save', 'attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-bottom:15px')))
+
             ->getForm();
         $form -> handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){

@@ -2,6 +2,11 @@
 {{ i.full_name }}
 {% endfor %}
 
+<script src="{{ asset('JS/jquery.js') }}"></script>
 
 
+<script>
 
+var url = $(this).data();
+console.log(url);
+</script>

@@ -29,7 +29,7 @@ class ChallengeController extends Controller
 //            ->add('image', FileType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('phone', TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('specialite',TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-            ->add('save',SubmitType::class, array('label'=>'save', 'attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-bottom:15px')))
+
             ->getForm();
         $form -> handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -94,7 +94,6 @@ class ChallengeController extends Controller
 //            ->add('image', FileType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('phone', TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('specialite',TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-            ->add('save',SubmitType::class, array('label'=>'save', 'attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-bottom:15px')))
             ->getForm();
 
         $form -> handleRequest($request);
