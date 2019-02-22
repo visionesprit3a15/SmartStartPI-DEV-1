@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
 class ChallengeController extends Controller
@@ -29,7 +30,7 @@ class ChallengeController extends Controller
 //            ->add('image', FileType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('phone', TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('specialite',TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
-
+            ->add('imageFile',VichImageType::class)
             ->getForm();
         $form -> handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -94,6 +95,7 @@ class ChallengeController extends Controller
 //            ->add('image', FileType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('phone', TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
             ->add('specialite',TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
+            ->add('imageFile',VichImageType::class)
             ->getForm();
 
         $form -> handleRequest($request);

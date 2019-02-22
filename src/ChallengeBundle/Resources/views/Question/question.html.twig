@@ -1,12 +1,20 @@
-{% for i in full_name %}
-{{ i.full_name }}
+{% for i in question %}
+    {% for q in i %}
+
+        <div class="content-element">
+            <p>{{ q.description }}</p>
+
+
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="answers[{{ q.id }}]" value="{{ q.id }}"
+                                {% if checked is defined %}{{ checked }}{% endif %} >
+                        <span class="upper">.</span> {{ q.choix }}
+                    </label>
+                </div>
+
+        </div>
+{% endfor %}
 {% endfor %}
 
-<script src="{{ asset('JS/jquery.js') }}"></script>
 
-
-<script>
-
-var url = $(this).data();
-console.log(url);
-</script>

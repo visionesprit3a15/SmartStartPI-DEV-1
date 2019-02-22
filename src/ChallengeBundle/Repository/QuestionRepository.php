@@ -10,11 +10,17 @@ namespace ChallengeBundle\Repository;
  */
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByQuestion($id){
-
-        $qb=$this->getEntityManager()
-            ->createQuery("select CONCAT(m.description,m.choix,m.reponse) AS full_name from ChallengeBundle:Question m WHERE m.id='$id'");
-        return $qb->getResult();
-
+public function findByQuestion($id)
+{
+    $query=$this->getEntityManager()
+        ->createQuery("SELECT m as question from ChallengeBundle:Question m where m.id ='$id' ");
+    return $query->getResult();
+}
+    public function findByChoix()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT CONCAT(m.description,m.choix,m.reponse) as choix from ChallengeBundle:Question m ");
+        return $query->getResult();
     }
+
 }

@@ -131,14 +131,24 @@ class QuestionController extends Controller
         $em=$this->getDoctrine()->getRepository(Question::class);
 
         $n=$em->findByQuestion($id);
+        $em1=$this->getDoctrine()->getRepository(Question::class)->find(1);
+        $em2=$this->getDoctrine()->getRepository(Question::class)->find(2);
         return $this->render('@Challenge\Question\question.html.twig', array(
-            'full_name' => $n
+            'question' => $n,'q1' =>$em1,
+            'q2' =>$em2
         ));
 
     }
     public function  evaluationAction()
-    {
+    {  //$sn = $this->getDoctrine()->getManager();
+
+        //$question=$sn->getRepository(Question::class)->find($id);
+        $em=$this->getDoctrine()->getRepository(Question::class);
+
+        $n=$em->findByChoix();
+
         return $this->render('@Challenge\Question\qcm_evaluation.html.twig', array(
+           'choix'=>$n
 
         ));
     }
