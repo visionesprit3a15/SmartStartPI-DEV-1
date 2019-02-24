@@ -113,6 +113,7 @@ class Challenge
     public function __construct()
     {
       $this->updateAt  = new \DateTime();
+
     }
     /**
      * Get id

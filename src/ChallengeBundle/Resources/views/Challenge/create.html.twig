@@ -28,15 +28,15 @@
                     </div>
                     <div class="jp_adp_form_wrapper">
 
-                        {{ form_row(form.email) }}
+                        {{ form_row(form.email,{ 'attr': {'class': 'divtest','placeholder': 'email','required' :'1','pattern':'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'} }) }}
 
                     </div>
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.phone) }}
+                        {{ form_row(form.phone,{ 'attr': {'class': 'divtest','placeholder': 'phone','required' :'1','pattern':'[0-9]{8}'} }) }}
 
                     </div>
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.date) }}
+                        {{ form_row(form.date,{ 'attr': {'class': 'divtest','placeholder': 'Date','required' :'1','pattern':'^(0?\d|[12]\d|3[01])-(0?\d|1[012])-((?:19|20)\d{2})$'} }) }}
 
                     </div>
 

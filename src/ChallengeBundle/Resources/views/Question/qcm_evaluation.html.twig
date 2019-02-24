@@ -1,10 +1,5 @@
 
-{% for i in choix %}
 
-
-
-       <input type="text" id="qq"value="{{ i.choix }}">
-{% endfor %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -24,6 +19,9 @@
             <img src="{{ asset('qcm/images/le_formateur.png')}}" style="width:50px;border:none;" align="left" alt="formateur informatique" />
         </a>
         <div class="titre_page"><h1>Quizz pour le freelancer- Système d'évaluation</h1></div>
+
+
+
 
         <div class="div_int_page">
 
@@ -51,6 +49,7 @@
 
                     <div class="centre">
                         <div class="titre_centre" id="question">
+
 
                         </div>
                     </div>
@@ -85,7 +84,32 @@
     </div>
 
 </div>
+<select id="">
+    {% set a = 0 %}
+{% for i in choix %}
 
+    {% set a = a + 1 %}
+
+    {% if a == 1 %}
+        <option id ="qq"value="{{ i.choix }}">{{ i.choix }}</option>
+    {% endif %}
+    {% if a == 2 %}
+        <option id ="q2"value="{{ i.choix }}">{{ i.choix }}</option>
+    {% endif %}
+    {% if a == 3 %}
+        <option id ="q3"value="{{ i.choix }}">{{ i.choix }}</option>
+    {% endif %}
+    {% if a == 4 %}
+        <option id ="q4"value="{{ i.choix }}">{{ i.choix }}</option>
+    {% endif %}
+    {% if a == 5 %}
+        <option id ="q5"value="{{ i.choix }}">{{ i.choix }}</option>
+    {% endif %}
+    {% if a == 6 %}
+        <option id ="q6"value="{{ i.choix }}">{{ i.choix }}</option>
+    {% endif %}
+{% endfor %}
+</select>
 </body>
 
 <script type="text/javascript" language="javascript">
@@ -129,14 +153,24 @@
 
         switch(numero) {
             case 1:
-                var chaine = document.getElementById('qq').value;
+                var chaine = document.getElementById('q2').value;
                 break;
             case 2:
                 var chaine = document.getElementById('qq').value;
                 break;
             case 3:
-                var chaine = document.getElementById('qq').value;
+                var chaine = document.getElementById('q3').value;
                 break;
+            case 4:
+                var chaine = document.getElementById('q4').value;
+                break;
+            case 5:
+                var chaine = document.getElementById('q5').value;
+                break;
+            case 6:
+                var chaine = document.getElementById('q6').value;
+                break;
+
 
         }
         return chaine;
@@ -150,10 +184,10 @@
 
         while(test==true)
         {
-            nb_alea = Math.floor(Math.random()*3) + 1;
+            nb_alea = Math.floor(Math.random()*6) + 1;
 
             if(mem_nb_alea.indexOf("-" + nb_alea +"_")>-1)
-                nb_alea = Math.floor(Math.random()*3) + 1;
+                nb_alea = Math.floor(Math.random()*6) + 1;
             else
             {
                 test = false;
@@ -176,4 +210,17 @@
     }
 
 </script>
+
 </html>
+<script src="{{ asset('JS/jquery.js') }}"></script>
+<script>
+    $(function () {
+        var timetext = $("[timer]");
+        setInterval(function () {
+            $.post("",{type :"timerupdate"},function (data) {
+                timetext.html("time left: "+ data + "seconds");
+            });
+
+        },1000)
+    });
+</script>

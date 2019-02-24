@@ -33,9 +33,6 @@ class QuestionController extends Controller
             $choix = $form['choix']->getData();
             $challenge = $form['challenge']->getData();
 
-
-
-
             $question->setDescription($description);
             $question->setReponse($reponse);
             $question->setChoix($choix);
@@ -48,11 +45,9 @@ class QuestionController extends Controller
             $sn->persist($question);
             $sn->flush();
 
-
-
-
             return $this->redirectToRoute('read_question');
         }
+
 
         return $this->render('@Challenge/Question/create.html.twig', array(
             'form'=>$form->createView()
@@ -139,16 +134,25 @@ class QuestionController extends Controller
         ));
 
     }
+
     public function  evaluationAction()
     {  //$sn = $this->getDoctrine()->getManager();
 
         //$question=$sn->getRepository(Question::class)->find($id);
+        date_default_timezone_get("Africa/Tunisia");
+        $timecountdownend=strtotime("2019-02-23 13:29:50");
+        $timecountdownstart=strtotime("-2 hour");
+        $timeleft = $timecountdownend - $timecountdownstart;
+        if(isset($_POST["type"]) === true && $_POST["type"] == "timerupdate")
+        {
+          echo($timeleft);
+        }
         $em=$this->getDoctrine()->getRepository(Question::class);
 
         $n=$em->findByChoix();
 
         return $this->render('@Challenge\Question\qcm_evaluation.html.twig', array(
-           'choix'=>$n
+           'choix'=>$n, "timeleft" => $timeleft
 
         ));
     }

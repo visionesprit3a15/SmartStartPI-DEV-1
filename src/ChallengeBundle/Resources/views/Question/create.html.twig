@@ -3,22 +3,22 @@
 
     <div class="jp_adp_main_section_wrapper">
         <div class="container">
-            {{ form_start(form, {'method': 'post', 'action': path('create') }) }}
+            {{ form_start(form, {'method': 'post', 'action': path('create_question') }) }}
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="jp_adp_form_heading_wrapper">
-                        <h2>Publier un challenge</h2>
+                        <h2>Publier une question</h2>
                     </div>
 
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.description) }}
+                        {{ form_row(form.description,{ 'attr': {'class': 'divtest','placeholder': 'Description','required' :'1'} }) }}
                     </div>
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.reponse) }}
+                        {{ form_row(form.reponse,{ 'attr': {'class': 'divtest','placeholder': 'Reponse','required' :'1','pattern':'^[0-9]*'} }) }}
 
                     </div>
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.choix) }}
+                        {{ form_row(form.choix,{ 'attr': {'class': 'divtest','placeholder': 'choix','required' :'1'} }) }}
                     </div>
 
 
