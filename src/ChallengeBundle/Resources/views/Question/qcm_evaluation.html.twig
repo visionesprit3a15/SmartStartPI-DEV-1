@@ -19,11 +19,13 @@
             <img src="{{ asset('qcm/images/le_formateur.png')}}" style="width:50px;border:none;" align="left" alt="formateur informatique" />
         </a>
         <div class="titre_page"><h1>Quizz pour le freelancer- Système d'évaluation</h1></div>
+         <h2><div id="time" style="float:right">timeout</div></h2>
+<script type="text/javascript">
+    var timeleft=2*60;
+</script>
 
 
-
-
-        <div class="div_int_page">
+        <div id="form1" onload="timeout()" class="div_int_page">
 
             <div style="width:100%;display:block;text-align:center;">
             </div>
@@ -125,6 +127,7 @@
         nb_erreurs = 0; mem_nb_alea="";
         init();
         suivant();
+        timeout();
     }
 
     function init()
@@ -142,9 +145,12 @@
 
         nb_questions--;
         if(nb_questions==0)
-            jouer=false;
+        jouer=false;
+
+
         init();
         suivant();
+
 
 
     }
@@ -207,6 +213,22 @@
 
         }
         bonne_rep = tab_question[5];
+    }
+    function timeout() {
+        var minute = Math.floor(timeleft/60);
+        var seconde =timeleft%60;
+        if(timeleft<=0)
+        {
+            clearTimeout(tm);
+          document.getElementById("form1").debuter();
+        }
+        else {
+            document.getElementById("time").innerHTML=minute+":"+seconde;
+        }
+        timeleft--;
+        var tm =setTimeout(function () {
+           timeout()
+        },1000);
     }
 
 </script>

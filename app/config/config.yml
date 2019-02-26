@@ -99,3 +99,5 @@ vich_uploader:
          delete_on_update: true
          delete_on_remove: true
 
+cmen_google_charts:
+    version: "current"

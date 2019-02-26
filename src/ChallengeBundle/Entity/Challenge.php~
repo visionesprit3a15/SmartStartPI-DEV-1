@@ -331,45 +331,4 @@ class Challenge
     }
 
 
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Challenge
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param $identreprise
-     */
-    public function setIdentreprise($identreprise)
-    {
-        $this->identreprise = $identreprise;
-
-    }
-
-    /**
-     * @return int
-     */
-    public function getIdentreprise()
-    {
-        return $this->identreprise;
-    }
 }

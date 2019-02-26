@@ -1,5 +1,33 @@
 {% extends 'challengeAdd.html.twig' %}
 {% block content %}
+    <div class="jp_counter_main_wrapper">
+        <div class="container">
+            <div class="gc_counter_cont_wrapper">
+                <div class="count-description">
+                    <span class="timer">{{ number }}</span><i class="fa fa-plus"></i>
+                    <h5 class="con1">Challenges</h5>
+                </div>
+            </div>
+            <div class="gc_counter_cont_wrapper2">
+                <div class="count-description">
+                    <span class="timer">555</span><i class="fa fa-plus"></i>
+                    <h5 class="con2">Projets</h5>
+                </div>
+            </div>
+            <div class="gc_counter_cont_wrapper3">
+                <div class="count-description">
+                    <span class="timer">555</span><i class="fa fa-plus"></i>
+                    <h5 class="con3">Missions</h5>
+                </div>
+            </div>
+            <div class="gc_counter_cont_wrapper4">
+                <div class="count-description">
+                    <span class="timer">888</span><i class="fa fa-plus"></i>
+                    <h5 class="con4">Agendas</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="jp_adp_main_section_wrapper">
         <div class="container">
@@ -10,14 +38,14 @@
                         <h2>Publier un challenge</h2>
                     </div>
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.nom) }}
+                        {{ form_row(form.nom,{ 'attr': {'class': 'divtest','placeholder': 'Nom','required' :'1'} }) }}
 
                     </div>
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.description) }}
+                        {{ form_row(form.description,{ 'attr': {'class': 'divtest','placeholder': 'description du challenge','required' :'1'} }) }}
                     </div>
                     <div class="jp_adp_form_wrapper">
-                        {{ form_row(form.specialite) }}
+                        {{ form_row(form.specialite,{ 'attr': {'class': 'divtest','placeholder': 'Specialite','required' :'1'} }) }}
                     </div>
 
 
@@ -37,6 +65,15 @@
                     </div>
                     <div class="jp_adp_form_wrapper">
                         {{ form_row(form.date,{ 'attr': {'class': 'divtest','placeholder': 'Date','required' :'1','pattern':'^(0?\d|[12]\d|3[01])-(0?\d|1[012])-((?:19|20)\d{2})$'} }) }}
+
+                    </div>
+                    <div class="jp_adp_form_wrapper">
+                        {{ form_row(form.imageFile,{ 'attr': {'class': 'divtest','placeholder': 'certificat','required' :'1'} }) }}
+
+                    </div>
+                    <div class="jp_adp_form_wrapper">
+                        <a> {{ app.user.id }}</a>
+                        <input type="text" name="idEntreprise" value="{{ app.user.id }}" hidden>
 
                     </div>
 

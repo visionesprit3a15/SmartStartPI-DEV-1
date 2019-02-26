@@ -1,0 +1,38 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block content %}
+
+
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Ajouter une question</h4>
+                <p class="card-description">
+
+                </p>
+
+                {{ form_start(form) }}
+
+                <div class="form-group">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.reponse) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(form.choix) }}
+
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.challenge) }}
+                </div>
+
+                <button type="submit" class="btn btn-success mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

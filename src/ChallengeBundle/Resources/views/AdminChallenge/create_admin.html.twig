@@ -1,0 +1,46 @@
+{% extends "baseAdmin.html.twig" %}
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Ajouter un challenge</h4>
+            <p class="card-description">
+
+            </p>
+
+                {{ form_start(form, {'method': 'post', 'action': path('create_admin') }) }}
+                <div class="form-group">
+                    {{ form_row(form.nom) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.description,{ 'attr': {'class': 'divtest','placeholder': 'description','required' :'1'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.specialite,{ 'attr': {'class': 'divtest','placeholder': 'specialite','required' :'1'} }) }}
+                </div>
+                <div class="form-group">
+                    <label>File upload</label>
+
+                    <div class="input-group col-xs-12">
+                        {{ form_row(form.imageFile) }}
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.email,{ 'attr': {'class': 'divtest','placeholder': 'email','required' :'1','pattern':'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'} }) }}
+
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.phone,{ 'attr': {'class': 'divtest','placeholder': 'phone','required' :'1','pattern':'[0-9]{8}'} }) }}
+                </div>
+                <div class="form-group">
+                {{ form_row(form.date,{ 'attr': {'class': 'divtest','placeholder': 'Date','required' :'1','pattern':'^(0?\d|[12]\d|3[01])-(0?\d|1[012])-((?:19|20)\d{2})$'} }) }}
+                </div>
+                <button type="submit" class="btn btn-success mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+                {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

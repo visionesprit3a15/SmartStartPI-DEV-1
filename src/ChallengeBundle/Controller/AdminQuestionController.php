@@ -5,14 +5,13 @@ namespace ChallengeBundle\Controller;
 use ChallengeBundle\Entity\Question;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
-class QuestionController extends Controller
+class AdminQuestionController extends Controller
 {
-    public function createAction(Request $request)
-    {  $user = $this->container->get('security.token_storage')->getToken()->getUser();
+    public function createQuestionAction(Request $request)
+    {
         $question = new Question();
         $form = $this->createFormBuilder($question)
             ->add('description',TextType::class, array('attr' => array('class'=>'form-control', 'style'=>'margin-bottom:15px')))
@@ -38,34 +37,30 @@ class QuestionController extends Controller
             $question->setChoix($choix);
             $question->setChallenge($challenge);
 
-            $question->setUser($user);
+            //$challenge->setUser($user);
 
 
             $sn = $this->getDoctrine()->getManager();
             $sn->persist($question);
             $sn->flush();
 
-            return $this->redirectToRoute('read_question');
+            return $this->redirectToRoute('readQuestion');
         }
-
-
-        return $this->render('@Challenge/Question/create.html.twig', array(
+        return $this->render('@Challenge/AdminQuestion/create_question.html.twig', array(
             'form'=>$form->createView()
         ));
     }
 
-    public function readAction()
-
-    {  $user = $this->container->get('security.token_storage')->getToken()->getUser();
+    public function readQuestionAction()
+    {
         $questions=$this->getDoctrine()->getRepository(Question::class)->findAll();
-
-        return $this->render('@Challenge/Question/read.html.twig', array(
+        return $this->render('@Challenge/AdminQuestion/read_question.html.twig', array(
             'questions' => $questions
         ));
     }
 
-    public function updateAction(Request $request,$id)
-    {  $user = $this->container->get('security.token_storage')->getToken()->getUser();
+    public function updateQuestionAction(Request $request,$id)
+    {
         $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
 
         $question->setDescription($question->getDescription());
@@ -101,64 +96,25 @@ class QuestionController extends Controller
             $question->setChoix($choix);
             $question->setChallenge($challenge);
 
-            $question->setUser($user);
+            //$challenge->setUser($user);
 
             $sn->flush();
 
-            return $this->redirectToRoute('read_question');
+            return $this->redirectToRoute('readQuestion');
         }
 
-            return $this->render('@Challenge/Question/update.html.twig', array(
-                'form'=>$form->createView()
+        return $this->render('@Challenge/AdminQuestion/update_question.html.twig', array(
+            'form'=>$form->createView()
         ));
     }
 
-    public function deleteAction($id)
+    public function deleteQuestionAction($id)
     {
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $sn = $this->getDoctrine()->getManager();
         $question=$sn->getRepository(Question::class)->find($id);
         $sn->remove($question);
         $sn->flush();
-        return $this->redirectToRoute('read_question');
-    }
-    public function questionAction($id)
-    {    $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        $sn = $this->getDoctrine()->getManager();
-
-        //$question=$sn->getRepository(Question::class)->find($id);
-        $em=$this->getDoctrine()->getRepository(Question::class);
-
-        $n=$em->findByQuestion($id);
-        $em1=$this->getDoctrine()->getRepository(Question::class)->find(1);
-        $em2=$this->getDoctrine()->getRepository(Question::class)->find(2);
-        return $this->render('@Challenge\Question\question.html.twig', array(
-            'question' => $n,'q1' =>$em1,
-            'q2' =>$em2
-        ));
-
-    }
-
-    public function  evaluationAction()
-    {  //$sn = $this->getDoctrine()->getManager();
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        //$question=$sn->getRepository(Question::class)->find($id);
-        date_default_timezone_get("Africa/Tunisia");
-        $timecountdownend=strtotime("2019-02-23 13:29:50");
-        $timecountdownstart=strtotime("-2 hour");
-        $timeleft = $timecountdownend - $timecountdownstart;
-        if(isset($_POST["type"]) === true && $_POST["type"] == "timerupdate")
-        {
-          echo($timeleft);
-        }
-        $em=$this->getDoctrine()->getRepository(Question::class);
-
-        $n=$em->findByChoix();
-
-        return $this->render('@Challenge\Question\qcm_evaluation.html.twig', array(
-           'choix'=>$n, "timeleft" => $timeleft
-
-        ));
+        return $this->redirectToRoute('readQuestion');
     }
 
 }

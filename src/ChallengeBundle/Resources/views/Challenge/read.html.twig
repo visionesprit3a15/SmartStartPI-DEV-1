@@ -13,15 +13,14 @@
         <div class="container">
             <form class="w-search">
                 <div class="form-group with-button">
+
                     <input class="form-control js-user-search" type="text" placeholder="Rechercher un challenge......">
-                    <button>
-                        <svg class="olymp-magnifying-glass-icon"></svg>
-                    </button>
+                    <div class="inline-items" id="entitiesNav">
+                        Recherche
+                    </div>
                 </div>
 
-                {#<div class="inline-items" id="entitiesNav">#}
-                {#Recherche #}
-                {#</div>#}
+
             </form>
 
 
@@ -39,7 +38,7 @@
                 <td> {{ v.email }}</td>
                 <td> {{ v.phone }}</td>
                 <td> {{ v.specialite }}</td>
-                <td><img src="{{ asset('') }}{{ vich_uploader_asset(v,'imageFile') }}" alt="author"></td>
+                <td><img src="{{ asset('qcm/images/certif.jpg') }}{{ vich_uploader_asset(v,'imageFile') }}" alt="author" height="30" width="30"></td>
                 <td> <a href="{{ path("create_question") }}" class="btn btn-primary"> post a question</a></td>
                 <td> <a href=" {{ path("update",{'id':v.id}) }}" class="btn btn-success"> Modifier</a></td>
                 <td> <a href=" {{ path("delete",{'id':v.id}) }}" class="btn btn-danger"> Supprimer</a></td>
@@ -55,54 +54,56 @@
 </body>
 
 </html>
-    <script>
+    <script src="{{ asset('JS/jquery.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        var searchRequest = null;
+        $(".js-user-search").keyup(function () {
+            var minlength = 1;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('rechercheChallenge') }}",
+                    data: {
+                        'q': value
+                    },
+                    dataType: "text",
+                    success: function (msg) {
+                        //we need to check if the value is the same
+                        //console.log(msg);
+                        if (value == $(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function (key, arr) {
+                                $.each(arr, function (id, value) {
 
-        $(document).ready(function () {
-            var searchRequest = null;
-            $(".js-user-search").keyup(function () {
-                var minlength = 1;
-                var that = this;
-                var value = $(this).val();
-                var entitySelector = $("#entitiesNav").html('');
-                if (value.length >= minlength) {
-                    if (searchRequest != null)
-                        searchRequest.abort();
-                    searchRequest = $.ajax({
-                        type: "GET",
-                        url: "{{ path('rechercheChallenge') }}",
-                        data: {
-                            'q': value
-                        },
-                        dataType: "text",
-                        success: function (msg) {
-                            //we need to check if the value is the same
-                            if (value == $(that).val()) {
-                                var result = JSON.parse(msg);
-                                $.each(result, function (key, arr) {
-                                    $.each(arr, function (id, value) {
-                                        if (key == 'entities') {
-                                            if (id != 'error') {
-                                                entitySelector.append(
+                                    if (key == 'entities') {
+                                        if (id != 'error') {
+                                            entitySelector.append(
 
-                                                    entitySelector.append( id +" " +
-                                                        ' <div class="autho"><img src="{{ asset('') }}' + value[3] + '" alt="avatar"></div>' +
-                                                        '<div class="notification-event">' +
-                                                        '<span class="h6 notification-friend"></a>' + value[0] + '</span>' + ' ' +
-                                                        '<span class="chat-message-item">' + '<b>' + value[1] + '</b>' + '</span>' + '</br>' +
-                                                        '<a href="/Pi-Dev-Web/web/app_dev.php/user/' +
-                                                        '</div>\n' +
-                                                        '<span class="notification-icon"><svg class="\' + escape(item.icon) + \'"><use xlink:href="icons/icons.svg#\' + escape(item.icon) + \'"></use></svg></span>' + '</a></li>');
+                                            entitySelector.append( value[0] +" a comme description "+ value[1] + "veuillez contacter ce mail pour plus d'informations "+value[3]));
 
-                                            } else {
-                                                entitySelector.append('<li class="errorLi">' + value + '</li>');
-                                            }
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">' + value + '</li>');
                                         }
-                                    });
+                                    }
                                 });
-                            }
+                            });
                         }
-                    });
-                }
-            });});
-    </script>
+                        else
+                        {
+                            entitySelector.append("le challenge n'existe pas");
+                        }
+
+                    }
+
+                });
+            }
+
+        });});
+</script>
 {%  endblock %}

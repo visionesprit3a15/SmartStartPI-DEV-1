@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new MissionBundle\MissionBundle(),
             new ChallengeBundle\ChallengeBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

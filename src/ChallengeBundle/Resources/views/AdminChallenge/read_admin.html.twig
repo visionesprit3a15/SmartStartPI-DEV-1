@@ -1,0 +1,53 @@
+{% extends "baseAdmin.html.twig" %}
+{% block content %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Liste des Challenges</h4>
+                        <p class="card-description">
+
+                            <code> <a href="{{ path("create_admin") }}"  class="btn btn-primary btn-md-2">ajouter</a></code>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Email</th>
+                                    <th>Télephone</th>
+                                    <th>Spécialité</th>
+                                    <th>Certificat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for v in challenges %}
+                                <tr>
+                                    <td> {{ v.nom }}</td>
+                                    <td> {{ v.description }}</td>
+                                    <td> {{ v.date|date }}</td>
+                                    <td> {{ v.email }}</td>
+                                    <td> {{ v.phone }}</td>
+                                    <td> {{ v.specialite }}</td>
+                                    <td><img src="{{ asset('') }}{{ vich_uploader_asset(v,'imageFile') }}" alt="author"></td>
+                                    <td> <a href="{{ path("create_question_admin")}}" class="btn btn-primary"> post a question</a></td>
+                                    <td> <a href=" {{ path("update_admin",{'id':v.id}) }}" class="btn btn-success"> Modifier</a></td>
+                                    <td> <a href=" {{ path("delete_admin",{'id':v.id}) }}" class="btn btn-danger"> Supprimer</a></td>
+
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

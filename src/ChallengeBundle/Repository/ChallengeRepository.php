@@ -10,11 +10,51 @@ namespace ChallengeBundle\Repository;
  */
 class ChallengeRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByNom($nom){
+    public function findByNom($p){
 
-        $query=$this->getEntityManager()->createQuery("SELECT m from ChallengeBundle:Challenge m where m.nom<'$nom'");
-
+        $query=$this->getEntityManager()->createQuery("SELECT m from ChallengeBundle:Challenge m where m.nom like :x")
+        ->setParameter('x','%'.$p.'%');
         return $query->getResult();
 
     }
+    public function NombreDesChallenge()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('ChallengeBundle:Challenge', 'e')
+        ;
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+    public function NombreDesChallengeWeb()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('ChallengeBundle:Challenge', 'e')
+            ->where("e.specialite = 'web'");
+
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+    public function NombreDesChallengeRx()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('ChallengeBundle:Challenge', 'e')
+            ->where("e.specialite = 'reseaux'");
+
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+    public function NombreDesChallengeIT()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('ChallengeBundle:Challenge', 'e')
+            ->where("e.specialite = 'it'");
+
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
 }

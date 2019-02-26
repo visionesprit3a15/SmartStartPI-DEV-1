@@ -10,6 +10,7 @@ namespace MyBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
 class RegistrationType extends AbstractType
@@ -22,6 +23,7 @@ class RegistrationType extends AbstractType
         $builder->add('adresse');
         $builder->add('specialite');$builder->add('diplome');
         $builder->add('niveauEtude');
+        $builder->add('imageFile',VichImageType::class);
     }
     public function getParent()
     {

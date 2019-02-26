@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * Controller managing the registration.
@@ -44,6 +45,7 @@ class RegistrationController extends Controller
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->formFactory = $formFactory;
+
         $this->userManager = $userManager;
         $this->tokenStorage = $tokenStorage;
     }
@@ -65,7 +67,9 @@ class RegistrationController extends Controller
             return $event->getResponse();
         }
 
-        $form = $this->formFactory->createForm();
+        $form = $this->formFactory
+            ->createForm();
+
         $form->setData($user);
 
         $form->handleRequest($request);

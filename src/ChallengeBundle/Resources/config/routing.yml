@@ -44,4 +44,44 @@ evaluation_question:
 
 rechercheChallenge:
     path:     /rechercheChallenge
-    defaults: { _controller: ChallengeBundle:Challenge:rechercheChallenge }
+    defaults: { _controller: ChallengeBundle:Challenge:search }
+
+statchallenge:
+    path:     /statchallenge
+    defaults: { _controller: ChallengeBundle:Challenge:statistique }
+
+read_admin:
+    path:     /readAdmin
+    defaults: { _controller: ChallengeBundle:AdminChallenge:readAdmin }
+
+create_admin:
+    path:     /createAdmin
+    defaults: { _controller: ChallengeBundle:AdminChallenge:createAdmin }
+
+update_admin:
+    path:     /updateAdmin/{id}
+    defaults: { _controller: ChallengeBundle:AdminChallenge:updateAdmin }
+
+delete_admin:
+    path:     /deleteAdmin/{id}
+    defaults: { _controller: ChallengeBundle:AdminChallenge:deleteAdmin }
+
+statchallengeadmin:
+    path:     /statchallengeadmin
+    defaults: { _controller: ChallengeBundle:AdminChallenge:statistique }
+
+create_question_admin:
+    path:     /createQuestion
+    defaults: { _controller: ChallengeBundle:AdminQuestion:createQuestion }
+
+read_question_admin:
+    path:     /readQuestion
+    defaults: { _controller: ChallengeBundle:AdminQuestion:readQuestion }
+
+update_question_admin:
+    path:     /updateQuestion/{id}
+    defaults: { _controller: ChallengeBundle:AdminQuestion:updateQuestion }
+
+delete_question_admin:
+    path:     /deleteQuestion/{id}
+    defaults: { _controller: ChallengeBundle:AdminQuestion:deleteQuestion }
